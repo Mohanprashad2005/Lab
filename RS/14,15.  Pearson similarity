@@ -1,0 +1,8 @@
+# 14/15 Top-5 Recommendations - Pearson
+import numpy as np
+
+R = np.array([[5,3,0,1,4],[4,0,0,1,5],[1,1,0,5,0],[1,0,0,4,4],[0,1,5,4,0]])
+u = 0
+corr = np.array([np.corrcoef(R[u], r)[0,1] for r in R]); corr[u]=0
+pred = np.dot(corr,R)/(np.abs(corr).sum())
+print("Top-5 items:", pred.argsort()[::-1][:5])
