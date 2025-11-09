@@ -1,0 +1,18 @@
+# 11.ROC Curve for Recommender
+import numpy as np
+from sklearn.metrics import roc_curve, auc
+import matplotlib.pyplot as plt
+
+# Example: actual and predicted scores for items
+y_true = np.array([1,0,1,0,1,0,1])
+y_scores = np.array([0.9,0.1,0.8,0.4,0.95,0.2,0.7])
+
+# Compute ROC
+fpr, tpr, _ = roc_curve(y_true, y_scores)
+roc_auc = auc(fpr, tpr)
+
+# Plot ROC
+plt.plot(fpr, tpr, label=f'AUC = {roc_auc:.2f}')
+plt.plot([0,1],[0,1],'--', color='gray')
+plt.xlabel('False Positive Rate'); plt.ylabel('True Positive Rate')
+plt.title('ROC Curve'); plt.legend(); plt.show()
