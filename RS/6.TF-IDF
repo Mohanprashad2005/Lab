@@ -1,0 +1,11 @@
+# 6.Content-based Recommender using TF-IDF
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+items = ["Fast car with V8 engine","Electric car with long battery","Luxury sedan car","Sports car with turbo"]
+tfidf = TfidfVectorizer().fit_transform(items)
+sim = cosine_similarity(tfidf)
+
+target = 0  # recommend for first item
+similar_items = sim[target].argsort()[::-1][1:3]  # top 2 similar
+print("Recommended items:", [items[i] for i in similar_items])
