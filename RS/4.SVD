@@ -1,5 +1,23 @@
-# SVD simple
-import numpy as np
-U,S,Vt=np.linalg.svd([[5,3,0,1],[4,0,0,1],[1,1,0,5],[1,0,0,4],[0,1,5,4]],full_matrices=False)
-R=np.dot(np.dot(U,np.diag(S)),Vt)
-print("Predicted Matrix:\n",np.round(R,2))
+#import numpy as np
+
+# Sparse matrix (0 = missing entry)
+A = np.array([[5,3,0,1],
+              [4,0,0,1],
+              [1,1,0,5],
+              [1,0,0,4],
+              [0,1,5,4]])
+
+# Step 1: Apply Singular Value Decomposition
+U, S, Vt = np.linalg.svd(A, full_matrices=False)
+
+# Step 2: Use only top k singular values (for dimensionality reduction)
+k = 2
+S_k = np.diag(S[:k])
+U_k = U[:, :k]
+Vt_k = Vt[:k, :]
+
+# Step 3: Reconstruct (predict missing values)
+R = np.dot(np.dot(U_k, S_k), Vt_k)
+
+# Step 4: Display predicted matrix
+print("Predicted Matrix:\n", np.round(R, 2))
