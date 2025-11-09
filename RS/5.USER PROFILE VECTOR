@@ -1,0 +1,16 @@
+# 5.User Profile Vector
+import numpy as np
+
+# Example: item features (rows = items, cols = features)
+items = np.array([[1,0,1],   # Item 1
+                  [0,1,1],   # Item 2
+                  [1,1,0],   # Item 3
+                  [0,0,1]])  # Item 4
+
+# User interactions (1 = interacted, 0 = not)
+user = np.array([1,0,1,0])  # User interacted with Item 1 and 3
+
+# Aggregate item features to create user profile
+user_profile = np.dot(user, items)
+
+print("User Profile Vector:", user_profile)
