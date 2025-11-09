@@ -1,0 +1,8 @@
+# Song Recommender - short
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+songs=["Artist1 Pop 2020","Artist2 Rock 2019","Artist3 Pop 2021","Artist4 Jazz 2020","Artist5 Rock 2020"]
+tfidf=TfidfVectorizer().fit_transform(songs)
+sim=cosine_similarity(tfidf)
+print("Recommended:", [songs[i] for i in sim[0].argsort()[::-1][1:3]])
