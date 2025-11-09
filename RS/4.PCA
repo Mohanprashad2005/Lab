@@ -1,0 +1,5 @@
+# SVD simple
+import numpy as np
+U,S,Vt=np.linalg.svd([[5,3,0,1],[4,0,0,1],[1,1,0,5],[1,0,0,4],[0,1,5,4]],full_matrices=False)
+R=np.dot(np.dot(U,np.diag(S)),Vt)
+print("Predicted Matrix:\n",np.round(R,2))
