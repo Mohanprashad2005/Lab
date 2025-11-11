@@ -1,0 +1,28 @@
+import cv2, mediapipe as mp
+
+hands, draw = mp.solutions.hands.Hands(False, 2, 0.5, 0.5), mp.solutions.drawing_utils
+cap = cv2.VideoCapture(0)
+
+def gesture(lm):
+    y = [lm.landmark[i].y for i in range(21)]
+    f = [y[4] < y[3], y[8] < y[5], y[12] < y[9], y[16] < y[13], y[20] < y[17]]
+    if f[1] and f[2] and not any(f[i] for i in (0,3,4)): return "V SIGN: Turn ON Lights"
+    if f[0] and not any(f[i] for i in (1,2,3,4)): return "THUMBS UP: Adjust Volume"
+    return "No Command"
+
+while True:
+    ok, img = cap.read()
+    if not ok: break
+    img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 1)
+    res = hands.process(img)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    txt = "No Hand Detected"
+    if res.multi_hand_landmarks:
+        for lm in res.multi_hand_landmarks:
+            draw.draw_landmarks(img, lm, mp.solutions.hands.HAND_CONNECTIONS)
+            txt = gesture(lm)
+    cv2.putText(img, txt, (10,50), 1, 2, (0,0,255), 2)
+    cv2.imshow("Smart Gesture Control", img)
+    if cv2.waitKey(5) & 0xFF == ord('q'): break
+
+cap.release(); cv2.destroyAllWindows()
