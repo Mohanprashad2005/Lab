@@ -1,0 +1,66 @@
+Step 1 — Create / prepare the input file
+
+Open Notepad (or any text editor).
+
+Type the input data required by your program (one record per line).
+
+Example (matrix combined input):
+
+A 0 0 1
+A 0 1 2
+...
+B 2 1 12
+
+
+Save the file as input.txt (choose ANSI or UTF-8 encoding). Put it in C:\Users\HP\Desktop\bd (example).
+
+Step 2 — Create mapper and reducer scripts
+
+Create mapper.py and reducer.py in the same folder.
+
+Both scripts must read from standard input (sys.stdin) and write to standard output (print()).
+
+Save them with .py extension.
+
+Note: On Windows you do not need executable permission or chmod. Use python mapper.py to run.
+
+Step 3 — Open the correct shell and change directory
+
+Open Command Prompt (CMD) or PowerShell.
+
+Navigate to the directory:
+
+cd C:\Users\HP\Desktop\bd
+
+Step 4 — Quick test: check Python and files
+
+Check Python:
+
+python --version
+
+
+List files to confirm:
+
+dir
+# or in PowerShell:
+Get-ChildItem
+
+Step 5 — Test mapper alone (debug)
+
+Send input to mapper and view output:
+
+type input.txt | python mapper.py
+
+
+(or PowerShell)
+
+Get-Content input.txt | python mapper.py
+
+
+If mapper works you’ll see key-value lines (e.g., 0,0\tA,0,1).
+
+Step 6 — Test full pipeline (mapper → sort → reducer)
+
+CMD (recommended):
+
+type input.txt | python mapper.py | sort | python reducer.py
