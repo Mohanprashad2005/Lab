@@ -1,0 +1,125 @@
+Step1:to  download the resources using this link
+
+https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.4.1/hadoop-3.4.1.tar.gz
+
+ 
+
+to click the below link and download it
+
+ hadoop-3.4.1.tar.gz 
+
+Step2:to extract the file and paste it into c folder
+
+ rename into hadoop
+
+step3:go to search in main searchbar to type(edit the system environment variables)
+
+to click that
+
+step4: click rights side last environment variables button and at top user variables to click an
+
+new button then select a java bin directory in c folder copy it and create a variable as JAVA_HOME then value as that copied java directory and paste it then create
+
+C:\Java\jdk-1.8\bin
+
+ 
+
+step5:top user variables to click an
+
+new button then select a hadoop bin directory copy it and create a variable as HADOOP_HOME then value as that copied hadoop directory and paste it then create
+
+C:\hadoop\bin
+
+ 
+
+step7:then goto c folder: hadoop/etc/hadoop/ then click core-site.xml to change the configuration
+
+<configuration>
+
+  <property>
+
+    <name>fs.defaultFS</name>
+
+    <value>hdfs://localhost:9000</value>
+
+  </property>
+
+</configuration>
+
+then change the hdfs-site.xml
+
+<configuration>
+
+    <property>
+
+        <name>dfs.replication</name>
+
+        <value>1</value>
+
+    </property>
+
+    <property>
+
+        <name>dfs.namenode.name.dir</name>
+
+        <value>C:\hadoop\data\namenode</value>
+
+    </property>
+
+    <property>
+
+        <name>dfs.datanode.data.dir</name>
+
+        <value>C:\hadoop\data\datanode</value>
+
+    </property>
+
+</configuration>
+
+Then we should create the manual folder data inside the c\hadoop
+
+Then within data it should be 2 folder creation datanode ,namenode
+
+mapred-site.xml
+
+Rename mapred-site.xml.template to mapred-site.xml and add the following content:
+
+
+
+<configuration>
+
+    <property>
+
+        <name>mapreduce.framework.name</name>
+
+        <value>yarn</value>
+
+    </property>
+
+</configuration>
+
+ 
+
+Final configuration
+
+yarn-site.xml
+
+<configuration>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+<property>
+        <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.shuffleHandler</value>
+    </property>
+</configuration>
+Atlast we should change the hadoop environment
+
+*Edit file C:/hadoop/etc/hadoop/hadoop-env.cmd to change the JAVA-HOME as our c folder java file directory
+
+Finally download the hadoop configuration using the below link and extract it
+
+https://github.com/MuhammadBilalYar/Hadoop-On-Window/blob/master/Hadoop%20Configuration.zip
+
+then extract hadoop configuration file then open the bin folder files and copy all the files and paste the all files into c folder hadoop  folder bin (delete the existion  bin files and paste the hadoop configuration bin files)
