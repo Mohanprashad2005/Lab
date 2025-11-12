@@ -1,0 +1,55 @@
+Step 2: Create a File in HDFS
+
+Use -touchz to create an empty file:
+
+hadoop fs -touchz /1.txt
+
+
+Check file in NameNode UI → Utilities → Browse the file.
+
+Step 3: Create a Directory in HDFS
+hadoop fs -mkdir /BigDataLab
+
+Step 4: Create a Sub-Directory
+hadoop fs -mkdir /BigDataLab/EX2
+
+
+Refresh NameNode UI → Sub-directory EX2 appears inside /BigDataLab.
+
+Step 5: Create Files in Sub-Directory
+hadoop fs -touchz /BigDataLab/EX2/file4.txt
+hadoop fs -touchz /BigDataLab/EX2/file5.txt
+
+Step 6: Delete Files from HDFS
+hadoop fs -rm /BigDataLab/EX2/file4.txt
+hadoop fs -rm /BigDataLab/EX2/file5.txt
+
+
+Output:
+
+Deleted /BigDataLab/EX2/file4.txt
+Deleted /BigDataLab/EX2/file5.txt
+
+Step 7: Delete a Directory
+hadoop fs -rm -r /BigDataLab/EX2
+
+
+Output:
+
+Deleted /BigDataLab/EX2
+
+Step 8: Delete Another File
+hadoop fs -rm /1.pdf
+
+
+Output:
+
+Deleted /1.pdf
+
+Step 9: View Files / Directories in HDFS
+hadoop fs -ls /
+hadoop fs -ls /BigDataLab
+
+Step 10: Stop Hadoop Services
+stop-yarn.sh
+stop-dfs.sh
